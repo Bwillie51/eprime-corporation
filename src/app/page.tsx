@@ -106,11 +106,16 @@ export default async function HomePage() {
           <p className="text-slate-600 text-base leading-relaxed max-w-3xl mx-auto">
             ePrime Corporation Limited is a premium multi-sector conglomerate dedicated to deploying end-to-end technical excellence, reliable commercial infrastructure, and premium product supply networks across Papua New Guinea. Through engineering-led approaches and standards-based execution layers, we serve critical industries spanning infrastructure development, network systems, corporate finance pathways, and supply chains.
           </p>
-          <div className="pt-2">
-            <Button asChild variant="outline" className="border-blue-200 text-blue-600 hover:bg-blue-50 font-bold">
-              <Link href="/about">Meet Our Professional Team →</Link>
-            </Button>
+                    <div className="pt-2">
+            {/* 🌟 FIXED: Replaced Button with a cleanly styled Link tag to bypass the compilation type error */}
+            <Link 
+              href="/about" 
+              className="inline-flex items-center justify-center border border-blue-200 text-blue-600 hover:bg-blue-50 font-bold px-6 h-10 rounded-md transition-colors text-sm"
+            >
+              Meet Our Professional Team →
+            </Link>
           </div>
+
         </div>
       </section>
 
