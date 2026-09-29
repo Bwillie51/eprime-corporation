@@ -156,11 +156,16 @@ export default async function HomePage() {
                     <h4 className="text-lg font-bold text-slate-800">{sector.name}</h4>
                     <p className="text-slate-600 text-sm mt-2 leading-relaxed line-clamp-3">{sector.description}</p>
                   </div>
-                  <div className="mt-6">
-                    <Button asChild variant="outline" className="w-full border-blue-200 hover:border-blue-500 hover:text-blue-600 transition-colors">
-                      <Link href={`/sectors/${sector.slug?.current || ''}`}>Explore Sector →</Link>
-                    </Button>
+                                    <div className="mt-6">
+                    {/* 🌟 FIXED: Replaced Button with a cleanly styled Link tag to completely clear the asChild warning */}
+                    <Link 
+                      href={`/sectors/${sector.slug?.current || ''}`}
+                      className="inline-flex items-center justify-center w-full border border-blue-200 hover:border-blue-500 text-slate-700 hover:text-blue-600 font-medium px-4 h-10 rounded-md transition-colors text-sm"
+                    >
+                      Explore Sector →
+                    </Link>
                   </div>
+
                 </div>
               </div>
             ))}
