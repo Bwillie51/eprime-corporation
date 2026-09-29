@@ -26,14 +26,32 @@ export function SectorLayout({ title, tagline, description, image, project }: Se
   // Check if a valid project object with an actual title was passed
   const hasValidProject = project && project.title && project.title.trim() !== "";
 
+  // 🌟 DEFENSIVE LOGIC: Safely resolve image source whether it is a string path, local image object, or Sanity reference block
+  let resolvedImageSrc = "";
+  if (image) {
+    if (typeof image === 'string') {
+      resolvedImageSrc = image;
+    } else if (image.src) {
+      // Handles local Next.js static image asset bundles natively (like import from assets folder)
+      resolvedImageSrc = image.src;
+    } else {
+      // Handles dynamic Sanity dataset image entries safely
+      try {
+        resolvedImageSrc = urlFor(image).url();
+      } catch (err) {
+        console.error("Failed to parse Sanity asset reference:", err);
+      }
+    }
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       {/* Sector Hero Header */}
       <section className="relative w-full h-[35vh] min-h-[280px] bg-slate-950 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 opacity-40">
-          {image && (
+          {resolvedImageSrc && (
             <Image
-              src={typeof image === 'string' ? image : urlFor(image).url()}
+              src={resolvedImageSrc}
               alt={title}
               fill
               priority
@@ -65,7 +83,7 @@ export function SectorLayout({ title, tagline, description, image, project }: Se
           </div>
         </div>
 
-        {/* 🌟 SAFEGUARDED CASE STUDY BLOCK: Only renders if a real project with a title exists */}
+        {/* Featured Case Study Block */}
         <div className="md:col-span-5">
           {hasValidProject ? (
             <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm space-y-4">
