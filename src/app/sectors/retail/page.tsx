@@ -8,11 +8,19 @@ import retailHeaderBg from '../../../assets/ePrime_Logo.jpeg';
 
 export default function RetailPage() {
   return (
-    <SectorLayout
+        <SectorLayout
       title="Retail Networks"
       tagline="Committed to delivering quality consumer products and trade."
-      description="Managing reliable wholesale supply integrations, regional commercial trade nodes, consumer merchandise pipelines, and dynamic modern point-of-sale inventory networks."
+      description="Managing reliable wholesale supply integrations, regional commercial trade nodes, consumer merchandise pipelines, and optimized local store supply points."
       image={retailHeaderBg}
+      project={{
+        title: "",
+        client: "",
+        date: "",
+        amount: "",
+        description: ""
+      }}
     />
+
   );
 }
