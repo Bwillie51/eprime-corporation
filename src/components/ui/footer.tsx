@@ -180,7 +180,7 @@ export function GlobalFooter() {
         <div className="flex items-center space-x-1.5 text-slate-700 bg-slate-950 px-3 py-1 rounded border border-slate-900 shadow-sm">
           <span>Engineered & Developed by</span>
           <Link 
-            href="https://www.biixoft.com" 
+            href="https://bii-xoft-website.vercel.app/" 
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-500 font-black hover:text-blue-400 hover:underline transition-colors tracking-wide"

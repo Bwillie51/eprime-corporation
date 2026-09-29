@@ -125,12 +125,12 @@ export default async function AboutPage() {
 
                 <div className="text-center pt-8">
           {/* 🌟 FIXED: Moved layout styling directly onto the Link element to remove the type warning */}
-          <Link 
+          {/*<Link 
             href="/" 
             className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 h-10 rounded-md shadow transition-colors text-sm"
           >
             Return
-          </Link>
+          </Link>*/}
         </div>
 
       </main>
