@@ -4,7 +4,7 @@ import React from 'react';
 import { SectorLayout } from '@/components/sectors/sector-layout';
 
 // Import the exact matching asset used for the main page preview card
-import motorsHeaderBg from '../../../assets/ePrime-Logo.jpeg';
+import motorsHeaderBg from '../../../assets/ePrime_Logo.jpeg';
 
 export default function MotorsPage() {
   return (
