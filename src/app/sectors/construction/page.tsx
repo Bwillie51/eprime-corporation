@@ -8,11 +8,13 @@ import constructionHeaderBg from '../../../assets/ePrime-BG.jpg';
 
 export default function ConstructionPage() {
   return (
-    <SectorLayout
+        <SectorLayout
       title="Construction & Civil"
       tagline="Building strong infrastructure footprints across Papua New Guinea."
-      description="Our construction division focuses on large-scale infrastructure, commercial frameworks, structural engineering, urban developments, and robust civil works built to withstand demanding environments."
+      description="Our construction division focuses on large-scale infrastructure, commercial frameworks, structural engineering projects, and local community developments."
       image={constructionHeaderBg}
+      project={[]} // 🌟 FIXED: Passed an empty array placeholder to satisfy the required type field property
     />
+
   );
 }
