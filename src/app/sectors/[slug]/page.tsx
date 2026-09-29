@@ -65,7 +65,7 @@ export default async function DynamicSectorPage({ params }: PageProps) {
       tagline={sector.tagline}
       description={sector.description}
       image={sector.image}
-      project={sector.featuredProject}
+      project={sector.featuredProject || undefined} // 🌟 FIXED: Convert any null data
     />
   );
 }
