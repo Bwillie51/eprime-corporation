@@ -123,11 +123,16 @@ export default async function AboutPage() {
           </div>
         )}
 
-        <div className="text-center pt-8">
-          <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8">
-            <Link href="/">Return to Corporate Hub</Link>
-          </Button>
+                <div className="text-center pt-8">
+          {/* 🌟 FIXED: Moved layout styling directly onto the Link element to remove the type warning */}
+          <Link 
+            href="/" 
+            className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 h-10 rounded-md shadow transition-colors text-sm"
+          >
+            Return
+          </Link>
         </div>
+
       </main>
     </div>
   );
