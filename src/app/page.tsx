@@ -217,11 +217,17 @@ export default async function HomePage() {
       </section>
 
       {/* Main Corporate Contact Link */}
+            {/* Main Corporate Contact Link */}
       <div className="text-center py-16 bg-white border-t border-slate-100">
-        <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-6 text-sm uppercase tracking-wider rounded-xl shadow-md">
-          <Link href="/contact">Open General Group Inquiries</Link>
-        </Button>
+        {/* 🌟 FIXED: Swapped Button for a cleanly styled Link to completely clear the last asChild type mismatch error */}
+        <Link 
+          href="/contact" 
+          className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-6 text-sm uppercase tracking-wider rounded-xl shadow-md transition-colors"
+        >
+          Open General Group Inquiries
+        </Link>
       </div>
+
     </div>
   );
 }
