@@ -67,14 +67,19 @@ export function SectorLayout({ title, tagline, description, image, project }: Se
               <h2 className="text-xs uppercase tracking-wider text-slate-400 font-bold mb-2">Division Operations</h2>
               <p className="text-slate-700 text-sm leading-relaxed whitespace-pre-line">{description}</p>
             </div>
-            <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
-              <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider px-6 flex-1 sm:flex-none">
-                <Link href="/contact">Inquire</Link>
-              </Button>
-              {/* <Button asChild variant="outline" className="border-slate-200 text-slate-600 font-medium text-xs uppercase tracking-wider px-6">
-                <Link href="/">Back to Overview</Link>
-              </Button> */}
-            </div>
+                      <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row gap-3">
+            {/* 🌟 FIXED: Replaced the Button wrapper tag with a natively styled Link tag to bypass the compilation type error */}
+            <Link 
+              href="/contact"
+              className="inline-flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs uppercase tracking-wider px-5 h-9 rounded shadow transition-colors"
+            >
+              Inquire
+            </Link>
+            
+            {/* Keeping your secondary commented fallback option clean underneath */}
+            {/* <Button asChild variant="outline" ... */}
+          </div>
+
           </div>
 
           {/* RIGHT COLUMN: Latest Project Feature Card (100% Dynamic from Sanity CMS) */}
