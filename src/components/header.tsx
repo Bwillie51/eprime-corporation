@@ -27,6 +27,12 @@ export default function Header() {
           <Link href="/about" className="text-slate-600 hover:text-blue-600 transition-colors">About Us</Link>
           {/* New Interactive News Tab at the Top */}
           <Link href="/news" className="text-slate-600 hover:text-blue-600 transition-colors">News & Updates</Link>
+          
+          {/* 🌟 ADDED: Direct desktop link to the embedded Sanity CMS Studio Login dashboard */}
+          <Link href="/studio" className="text-slate-600 hover:text-blue-600 transition-colors">
+            Login
+          </Link>
+
           <Link href="/contact" className="text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg text-xs uppercase tracking-wider font-bold transition-all shadow-sm">
             Contact
           </Link>
@@ -50,6 +56,12 @@ export default function Header() {
           <Link href="/" onClick={() => setIsOpen(false)} className="text-sm font-medium text-slate-700 hover:text-blue-600 py-1">Home</Link>
           <Link href="/about" onClick={() => setIsOpen(false)} className="text-sm font-medium text-slate-700 hover:text-blue-600 py-1">About Us</Link>
           <Link href="/news" onClick={() => setIsOpen(false)} className="text-sm font-medium text-slate-700 hover:text-blue-600 py-1">News & Updates</Link>
+          
+          {/* 🌟 ADDED: Mobile link to the embedded Sanity CMS Studio Login dashboard */}
+          <Link href="/studio" onClick={() => setIsOpen(false)} className="text-sm font-medium text-slate-700 hover:text-blue-600 py-1">
+            Login
+          </Link>
+
           <Link href="/contact" onClick={() => setIsOpen(false)} className="text-center text-xs font-bold uppercase tracking-wider text-white bg-blue-600 py-2.5 rounded-lg shadow-sm">
             Contact
           </Link>
