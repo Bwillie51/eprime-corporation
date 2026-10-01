@@ -21,9 +21,10 @@ export default function ContactPage() {
       sector: 'general',
       message: '',
     },
-        onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
-        const response = await fetch('/api/send-email', {
+        // 🌟 FIXED: Updated endpoint path to target your true backend file location
+        const response = await fetch('/api/send', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(values),
@@ -43,8 +44,6 @@ export default function ContactPage() {
         alert(`Frontend Connection Error: ${error.message}`);
       }
     },
-
-
   });
 
   return (
@@ -54,7 +53,7 @@ export default function ContactPage() {
         {/* Contact Form Header Banner */}
         <div className="bg-slate-950 text-white p-6 text-center border-b border-slate-800">
           <h1 className="text-xl font-black tracking-tight">Enquiries</h1>
-          <p className="text-slate-400 text-xs mt-1">Send in your quiries here, or for more information.</p>
+          <p className="text-slate-400 text-xs mt-1">Send in your inquiries here, or for more information.</p>
         </div>
 
         {/* Formik Tracking Core Container */}
@@ -133,7 +132,7 @@ export default function ContactPage() {
             type="submit"
             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 text-xs uppercase tracking-widest transition-colors shadow-sm mt-2"
           >
-            Submit
+            Send
           </Button>
 
         </form>

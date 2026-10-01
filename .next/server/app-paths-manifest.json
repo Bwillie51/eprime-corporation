@@ -1,5 +1,7 @@
 {
-  "/icon.png/route": "app/icon.png/route.js",
   "/studio/[[...index]]/page": "app/studio/[[...index]]/page.js",
-  "/page": "app/page.js"
+  "/api/send/route": "app/api/send/route.js",
+  "/contact/page": "app/contact/page.js",
+  "/page": "app/page.js",
+  "/news/page": "app/news/page.js"
 }
