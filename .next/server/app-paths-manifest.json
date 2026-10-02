@@ -1,7 +1,7 @@
 {
-  "/studio/[[...index]]/page": "app/studio/[[...index]]/page.js",
-  "/api/send/route": "app/api/send/route.js",
   "/contact/page": "app/contact/page.js",
+  "/api/send/route": "app/api/send/route.js",
   "/page": "app/page.js",
+  "/studio/[[...index]]/page": "app/studio/[[...index]]/page.js",
   "/news/page": "app/news/page.js"
 }
