@@ -147,23 +147,34 @@ export function GlobalFooter() {
             <div className="flex items-start space-x-2">
               <span className="text-blue-500 shrink-0 select-none"></span>
               <p className="text-slate-400">
-                Section 12, Allotment 4,<br />
-                Highlands Highway, Wabag Town,<br />
-                Enga Province, Papua New Guinea
+                Henau Drive, Section 90, Allotment 07,<br />
+                NCD, 111, Papua New Guinea<br />
               </p>
             </div>
 
             <div className="flex items-center space-x-2">
               <span className="text-blue-500 shrink-0 select-none">📞</span>
               <p className="text-slate-400 font-semibold">
-                +675 547 1234 &nbsp;|&nbsp; +675 7000 5678
+                +675 3947844 &nbsp;|&nbsp; +675 78285135
               </p>
             </div>
 
             <div className="flex items-center space-x-2">
               <span className="text-blue-500 shrink-0 select-none">✉️</span>
               <p className="text-slate-400">
-                londe@eprimecorp.com
+                ednol.prime@gmail.com &nbsp;|&nbsp; services@eprimecorp.com
+              </p>
+              
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <span className="text-blue-500 shrink-0 select-none">🌐</span>
+
+              <p>
+              <Link href="https://www.eprimecorp.com/" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-500 transition-colors" title="Instagram Gallery">
+               www.eprimecorp.com 
+            
+              </Link>
               </p>
             </div>
 
