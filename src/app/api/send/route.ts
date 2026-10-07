@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     const safeSector = sector ? sector.toUpperCase() : 'GENERAL';
 
     const { data, error } = await resend.emails.send({
-      from: 'ePrime Inquiries <inquiries@eprimecorp.com>', // 🌟 FIXED: Standardized valid sender string label format structure
+      from: 'ePrime Inquiries <support@eprimecorp.com>', // 🌟 FIXED: Standardized valid sender string label format structure
       to: 'support@eprimecorp.com',
       subject: `New Corporate Query: ${safeSector} Division`, // 🌟 FIXED: Crash safeguard configuration
       html: `
