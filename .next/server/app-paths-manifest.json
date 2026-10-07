@@ -1,4 +1,8 @@
 {
-  "/page": "app/page.js",
-  "/contact/page": "app/contact/page.js"
+  "/_not-found/page": "app/_not-found/page.js",
+  "/sectors/finance/page": "app/sectors/finance/page.js",
+  "/sectors/construction/page": "app/sectors/construction/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/sectors/motors/page": "app/sectors/motors/page.js",
+  "/page": "app/page.js"
 }

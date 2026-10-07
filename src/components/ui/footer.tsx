@@ -118,22 +118,34 @@ export function GlobalFooter() {
             </li>
             <li>
               <Link href="/sectors/construction" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
-                Civil & Construction
+                Civil & Infrastructure
               </Link>
             </li>
             <li>
               <Link href="/sectors/logistics" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
-                Logistics & Supply
+                Trading & Distribution
               </Link>
             </li>
             <li>
               <Link href="/sectors/motors" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
-                Transport & Motors
+                Transport & Logistics
               </Link>
             </li>
             <li>
-              <Link href="/sectors/retail" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
-                Retail Distribution
+              <Link href="/sectors/finance" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
+                Agriculture & Livestock
+              </Link>
+            </li>
+            <li>
+              <Link href="" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
+                Financial Services (Not yet Active)
+              </Link>
+            </li>
+          
+        
+            <li>
+              <Link href="" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
+                Mining & Minerals (Not yet active)
               </Link>
             </li>
           </ul>
