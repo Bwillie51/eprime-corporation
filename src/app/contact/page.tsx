@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { useFormik } from 'formik';
+import ReCAPTCHA from 'react-google-recaptcha'; // 🌟 Added dependency
 import { Button } from '@/components/ui/button';
 
 interface FormValues {
@@ -13,6 +14,10 @@ interface FormValues {
 }
 
 export default function ContactPage() {
+  // 🌟 Security States to track the reCAPTCHA token validation
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
   const formik = useFormik<FormValues>({
     initialValues: {
       name: '',
@@ -22,8 +27,13 @@ export default function ContactPage() {
       message: '',
     },
     onSubmit: async (values, { resetForm }) => {
+      // 🛡️ SECURITY WALL: Block spam bots if the checkbox hasn't been ticked
+      if (!captchaToken) {
+        alert('Security Check Required: Please verify that you are not a robot first!');
+        return;
+      }
+
       try {
-        // 🌟 FIXED: Updated endpoint path to target your true backend file location
         const response = await fetch('/api/send', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -34,13 +44,15 @@ export default function ContactPage() {
 
         if (response.ok) {
           alert('Thank you! Your corporate query has been transmitted successfully.');
+          
+          // Clean the inputs and reset the security widget token
           resetForm();
+          setCaptchaToken(null);
+          recaptchaRef.current?.reset();
         } else {
-          // 🌟 FORCE IT TO TELL US WHAT FAILED:
           alert(`Server Error: ${result.error || 'Failed to map parameters'}`);
         }
       } catch (error: any) {
-        // 🌟 FORCE IT TO TELL US IF THE NETWORK BLOCKED THE PATH entirely:
         alert(`Frontend Connection Error: ${error.message}`);
       }
     },
@@ -127,10 +139,19 @@ export default function ContactPage() {
             />
           </div>
 
+          {/* 🛡️ GOOGLE RECAPTCHA "I'M NOT A ROBOT" BOX */}
+          <div className="flex justify-center py-2 overflow-hidden">
+            <ReCAPTCHA
+              ref={recaptchaRef}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "6Lc0ueItAAAAAAa8zG_MX_fo6rFjd4SpQX4YOK-t"} // Uses global test fallback key until you map your unique ones
+              onChange={(token) => setCaptchaToken(token)}
+            />
+          </div>
+
           {/* Form Action Button primitive */}
           <Button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 text-xs uppercase tracking-widest transition-colors shadow-sm mt-2"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 text-xs uppercase tracking-widest transition-colors shadow-sm mt-1"
           >
             Send
           </Button>
