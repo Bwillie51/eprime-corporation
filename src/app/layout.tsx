@@ -10,10 +10,63 @@ import { GlobalFooter } from '@/components/ui/footer';
 
 const inter = Inter({ subsets: ["latin"] });
 
+
 export const metadata: Metadata = {
-  title: "ePrime Corporation Limited",
+  // 🌟 Base URL configuration for absolute path resolutions
+  metadataBase: new URL('https://eprimecorp.com'),
+  
+  title: {
+    default: "ePrime Corporation Limited",
+    template: "%s | ePrime Corporation Limited"
+  },
   description: "Powering Enterprise. Enabling Growth. Multi-sector industrial infrastructure systems across Papua New Guinea.",
+  keywords: ["ePrime", "ePrime Corporation", "Papua New Guinea", "PNG Business", "Civil Engineering PNG", "ICT Solutions Port Moresby", "Logistics and Freight", "Industrial Infrastructure"],
+  
+  // 📄 Standard Canonical indexing references to prevent duplicate tracking penalties
+  alternates: {
+    canonical: 'https://eprimecorp.com',
+  },
+
+  // 🌐 Open Graph structure for Facebook, LinkedIn, and WhatsApp rich card generation
+  openGraph: {
+    title: "ePrime Corporation Limited",
+    description: "Multi-sector industrial infrastructure systems powering enterprise and growth across Papua New Guinea.",
+    url: 'https://eprimecorp.com',
+    siteName: 'ePrime Corporation',
+    locale: 'en_PG',
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.png', // 🎨 Tip: Drop a 1200x630 pixel brand banner named og-image.png into your public/ folder later!
+        width: 1200,
+        height: 630,
+        alt: 'ePrime Corporation Limited Enterprise Portfolio Banner',
+      },
+    ],
+  },
+
+  // 🐦 Twitter / X Rich Card Rendering
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ePrime Corporation Limited',
+    description: 'Multi-sector industrial infrastructure systems across Papua New Guinea.',
+    images: ['/og-image.png'],
+  },
+
+  // 📱 Device system configurations
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
+
 // 2. Setup your WhatsApp details
   const phoneNumber = "67573947844"; // Replace with your actual phone number in international format (without '+' or spaces)
   const message = encodeURIComponent("Hello! I visited your website and would like to know more about your services.");
