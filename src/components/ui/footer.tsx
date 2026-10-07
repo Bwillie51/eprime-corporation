@@ -2,18 +2,48 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// 📡 SANITY CMS CLIENT CORE HANDSHAKE LAYOUT IMPORTS
+import { sanityClient } from '@/lib/sanity'; 
+
 // Import your local logo asset to serve as the visual anchor emblem
 import logoAsset from '../../assets/ePrime_Logo.jpeg';
 
-export function GlobalFooter() {
+interface SectorData {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+}
+
+// 📡 GROQ Fetch Routine: Retrieves all active corporate sectors dynamically from your Sanity dataset
+async function getCorporateSectors(): Promise<SectorData[]> {
+  const query = `*[_type == "sector"] | order(title asc) {
+    _id,
+    title,
+    slug
+  }`;
+  
+  try {
+    const data = await sanityClient.fetch(query);
+    return data || [];
+  } catch (error) {
+    console.error("Failed to stream dynamic footer sectors:", error);
+    return [];
+  }
+}
+
+export async function GlobalFooter() {
+  // Execute the data stream query straight from Sanity before rendering the layout
+  const sectors = await getCorporateSectors();
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="w-full bg-slate-950 text-slate-400 border-t border-slate-900 pt-16 pb-8 px-6 mt-auto">
-      {/* Upper Footer Segment Grid Map */}
+      {/* Upper Footer Segment Grid Map Layout */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 pb-12 border-b border-slate-900">
         
-        {/* Column 1: Brand Logo Identity & Social Network Media Connections */}
+        {/* COLUMN 1: Brand Logo Identity & Social Network Media Connections */}
         <div className="md:col-span-4 space-y-5">
           <div className="flex items-center space-x-3">
             <div className="relative h-10 w-10 rounded-lg overflow-hidden border border-slate-800 bg-white shrink-0">
@@ -75,7 +105,7 @@ export function GlobalFooter() {
           </div>
         </div>
 
-        {/* Column 2: Core Directory & Information Hub Links */}
+        {/* COLUMN 2: Core Directory & Information Hub Links */}
         <div className="md:col-span-2 space-y-4">
           <h4 className="text-slate-200 text-xs font-bold uppercase tracking-wider">Corporate Hub</h4>
           <ul className="space-y-2 text-xs">
@@ -102,114 +132,102 @@ export function GlobalFooter() {
           </ul>
         </div>
 
-        {/* Column 3: Full Directory of Dynamic Sector Channels */}
+        {/* COLUMN 3: Dynamic Active Sectors Routing Group */}
         <div className="md:col-span-3 space-y-4">
           <h4 className="text-slate-200 text-xs font-bold uppercase tracking-wider">Active Sectors</h4>
           <ul className="space-y-2 text-xs">
-            <li>
-              <Link href="/sectors/eprime-techfusion" className="hover:text-blue-500 hover:underline transition-colors block font-medium">
-                Information Technology
-              </Link>
+            {sectors.length > 0 ? (
+              sectors.map((sector) => (
+                <li key={sector._id}>
+                  {/* 🌟 AUTOMATED LINK COUPLING: Safely references the production Sanity slug parameters */}
+                  <Link 
+                    href={`/sectors/${sector.slug.current}`}
+                    className="text-slate-400 hover:text-blue-500 hover:underline transition-colors block font-medium"
+                  >
+                    {sector.title}
+                  </Link>
+                </li>
+              ))
+            ) : (
+              // Fallback block if Sanity network handshakes experience high transmission delays
+              <li className="text-slate-600 italic">No active sectors loaded.</li>
+            )}
+
+                        {/* 🛠️ UPCOMING OPERATIONS SECTION ANCHORS */}
+            <li className="pt-2 border-t border-slate-900">
+              <span className="text-slate-600 block text-[10px] uppercase tracking-wider font-extrabold">
+                Upcoming Operations
+              </span>
             </li>
             <li>
-              <Link href="/sectors/eprime-advisory-services" className="hover:text-blue-500 hover:underline transition-colors block font-medium">
-                Corporate Advisory
-              </Link>
+              <span className="text-slate-600 cursor-not-allowed opacity-50 block">
+                Financial Services (Not yet active)
+              </span>
             </li>
             <li>
-              <Link href="/sectors/construction" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
-                Civil & Infrastructure
-              </Link>
-            </li>
-            <li>
-              <Link href="/sectors/logistics" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
-                Trading & Distribution
-              </Link>
-            </li>
-            <li>
-              <Link href="/sectors/motors" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
-                Transport & Logistics
-              </Link>
-            </li>
-            <li>
-              <Link href="/sectors/finance" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
-                Agriculture & Livestock
-              </Link>
-            </li>
-            <li>
-              <Link href="" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
-                Financial Services (Not yet Active)
-              </Link>
-            </li>
-          
-        
-            <li>
-              <Link href="" className="text-slate-600 hover:text-blue-500 hover:underline transition-colors block">
+              <span className="text-slate-600 cursor-not-allowed opacity-50 block">
                 Mining & Minerals (Not yet active)
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        {/* 🏢 COLUMN 4: VERIFIED CORPORATE ADDRESS & LOCAL COMMUNICATION DETAILS */}
+        <div className="md:col-span-3 space-y-4">
+          <h4 className="text-slate-200 text-xs font-bold uppercase tracking-wider">Address</h4>
+          <ul className="space-y-3 text-xs leading-relaxed">
+            <li className="text-slate-400">
+              Henau Drive, Section 90, Allotment 07,<br />
+              NCD, 111, Papua New Guinea
+            </li>
+            
+            {/* Phone Verification Sub-Row Container */}
+            <li className="flex items-center space-x-2 pt-1 border-t border-slate-900">
+              <svg className="w-3.5 h-3.5 text-slate-500 shrink-0 fill-current" viewBox="0 0 24 24">
+                <path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.27c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.27 1.02l-2.2 2.2z"/>
+              </svg>
+              <span className="text-slate-400 font-medium">
+                +675 3947844 <span className="text-slate-700">|</span> +675 78285135
+              </span>
+            </li>
+
+            {/* Email Registry Sub-Row Container */}
+            <li className="flex items-center space-x-2 pt-1 border-t border-slate-900">
+              <svg className="w-3.5 h-3.5 text-slate-500 shrink-0 fill-current" viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+              <Link href="mailto:ednol.prime@gmail.com" className="hover:text-blue-500 hover:underline break-all">
+                ednol.prime@gmail.com 
+              </Link>
+              | 
+              <Link href="mailto:support@eprimecorp.com" className="hover:text-blue-500 hover:underline break-all">
+                support@eprimecorp.com
+              </Link>
+            </li>
+
+            {/* Web Verification URL Anchor Container */}
+            <li className="flex items-center space-x-2 pt-1 border-t border-slate-900">
+              <svg className="w-3.5 h-3.5 text-slate-500 shrink-0 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+              </svg>
+              <Link href="https://eprimecorp.com" className="text-blue-500 font-bold hover:underline tracking-tight">
+                www.eprimecorp.com
               </Link>
             </li>
           </ul>
         </div>
 
-        {/* Column 4: Headquarters Registry Office Coordinates Block */}
-        <div className="md:col-span-3 space-y-4">
-          <h4 className="text-slate-200 text-xs font-bold uppercase tracking-wider">Address</h4>
-          <div className="space-y-3.5 text-xs leading-relaxed">
-            
-            <div className="flex items-start space-x-2">
-              <span className="text-blue-500 shrink-0 select-none"></span>
-              <p className="text-slate-400">
-                Henau Drive, Section 90, Allotment 07,<br />
-                NCD, 111, Papua New Guinea<br />
-              </p>
-            </div>
-
-            <div className="flex items-center space-x-2">
-              <span className="text-blue-500 shrink-0 select-none">📞</span>
-              <p className="text-slate-400 font-semibold">
-                +675 3947844 &nbsp;|&nbsp; +675 78285135
-              </p>
-            </div>
-
-            <div className="flex items-center space-x-2">
-              <span className="text-blue-500 shrink-0 select-none">✉️</span>
-              <p className="text-slate-400">
-                ednol.prime@gmail.com &nbsp;|&nbsp; support@eprimecorp.com
-              </p>
-              
-            </div>
-
-            <div className="flex items-center space-x-2">
-              <span className="text-blue-500 shrink-0 select-none">🌐</span>
-
-              <p>
-              <Link href="https://www.eprimecorp.com/" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-500 transition-colors" title="Instagram Gallery">
-               www.eprimecorp.com 
-            
-              </Link>
-              </p>
-            </div>
-
-          </div>
-        </div>
-
       </div>
 
-      {/* Lower Sub-Footer Legal & Developer Signatures Strip */}
-      <div className="max-w-6xl mx-auto pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-600 gap-4">
-        <p>© {currentYear} ePrime Corporation Limited. All Rights Reserved.</p>
+      {/* LOWER FOOTER: Copyright Statements & Developer Signoff Panel */}
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between mt-10 pt-6 text-[11px] text-slate-600 space-y-4 sm:space-y-0 border-t border-slate-900/50">
+        <div>
+          &copy; {currentYear} ePrime Corporation Limited. All Rights Reserved.
+        </div>
         
-        {/* BiiXoft Professional Agency Credit Seal */}
-        <div className="flex items-center space-x-1.5 text-slate-700 bg-slate-950 px-3 py-1 rounded border border-slate-900 shadow-sm">
-          <span>Engineered & Developed by</span>
-          <Link 
-            href="https://bii-xoft-website.vercel.app/" 
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-500 font-black hover:text-blue-400 hover:underline transition-colors tracking-wide"
-          >
-            BiiXoft
-          </Link>
+        {/* BiiXoft Signature Anchor Badge */}
+        <div className="bg-slate-900/40 border border-slate-900 px-3 py-1.5 rounded-md text-slate-500 text-[10px] tracking-wide">
+          Engineered & Developed by <span className="text-blue-500 font-black tracking-tight hover:text-blue-400 cursor-default transition-colors">BiiXoft</span>
         </div>
       </div>
     </footer>
