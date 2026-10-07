@@ -162,7 +162,7 @@ export function GlobalFooter() {
             <div className="flex items-center space-x-2">
               <span className="text-blue-500 shrink-0 select-none">✉️</span>
               <p className="text-slate-400">
-                ednol.prime@gmail.com &nbsp;|&nbsp; services@eprimecorp.com
+                ednol.prime@gmail.com &nbsp;|&nbsp; support@eprimecorp.com
               </p>
               
             </div>
