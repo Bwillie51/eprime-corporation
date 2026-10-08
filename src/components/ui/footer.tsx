@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-// 📡 SANITY CMS CLIENT CORE HANDSHAKE LAYOUT IMPORTS
+// 📡 SANITY CMS CONNECTOR: Matches your exact homepage dataset framework paths
 import { sanityClient } from '@/lib/sanity'; 
 
 // Import your local logo asset to serve as the visual anchor emblem
@@ -16,8 +16,9 @@ interface SectorData {
   };
 }
 
-// 📡 GROQ Fetch Routine: Retrieves all active corporate sectors dynamically from your Sanity dataset
+// 📡 GROQ Database Fetch Routine
 async function getCorporateSectors(): Promise<SectorData[]> {
+  // Queries your custom Sanity schema for published, live divisions
   const query = `*[_type == "sector"] | order(title asc) {
     _id,
     title,
@@ -34,22 +35,22 @@ async function getCorporateSectors(): Promise<SectorData[]> {
 }
 
 export async function GlobalFooter() {
-  // Execute the data stream query straight from Sanity before rendering the layout
+  // Pulls your 6 active corporate divisions straight from Sanity live
   const sectors = await getCorporateSectors();
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="w-full bg-slate-950 text-slate-400 border-t border-slate-900 pt-16 pb-8 px-6 mt-auto">
-      {/* Upper Footer Segment Grid Map Layout */}
+      {/* Upper Footer Segment Grid */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 pb-12 border-b border-slate-900">
         
-        {/* COLUMN 1: Brand Logo Identity & Social Network Media Connections */}
+        {/* COLUMN 1: Brand Identity & Social Links */}
         <div className="md:col-span-4 space-y-5">
           <div className="flex items-center space-x-3">
             <div className="relative h-10 w-10 rounded-lg overflow-hidden border border-slate-800 bg-white shrink-0">
               <Image 
                 src={logoAsset} 
-                alt="ePrime Corporation Small Logo Asset" 
+                alt="ePrime Corporation Small Logo" 
                 fill 
                 className="object-contain p-1"
               />
@@ -68,12 +69,9 @@ export async function GlobalFooter() {
             Powering Enterprise. Enabling Growth. A leading multi-sector conglomerate engineered to deploy premium product supply networks and robust technical excellence infrastructure layers across Papua New Guinea.
           </p>
 
-          {/* Responsive Social Media SVG Vector Group Links */}
           <div className="space-y-1.5 pt-1">
             <h4 className="text-slate-600 text-[10px] font-extrabold uppercase tracking-wider">Connect Channels</h4>
             <div className="flex items-center space-x-3">
-              
-              {/* Facebook Icon */}
               <Link href="https://www.facebook.com/profile.php?id=61582208888740" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-500 transition-colors" title="Facebook Connect">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
                   <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.8z"/>
@@ -100,46 +98,29 @@ export async function GlobalFooter() {
                   <path d="M12.53 2c.1 4.04 3.01 6.88 6.96 7.15v3.47a9.92 9.92 0 0 1-4.73-1.85V16A6.5 6.5 0 1 1 8.24 9.5a6.45 6.45 0 0 1 4.3 1.65V2h-.01z"/>
                 </svg>
               </Link> */}
-
             </div>
           </div>
         </div>
 
-        {/* COLUMN 2: Core Directory & Information Hub Links */}
+        {/* COLUMN 2: Corporate Hub Links */}
         <div className="md:col-span-2 space-y-4">
           <h4 className="text-slate-200 text-xs font-bold uppercase tracking-wider">Corporate Hub</h4>
           <ul className="space-y-2 text-xs">
-            <li>
-              <Link href="/" className="hover:text-blue-500 hover:underline transition-colors block">
-                Headquarters
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className="hover:text-blue-500 hover:underline transition-colors block">
-                Our Executive Team
-              </Link>
-            </li>
-            <li>
-              <Link href="/news" className="hover:text-blue-500 hover:underline transition-colors block">
-                Media Center Feed
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact" className="hover:text-blue-500 hover:underline transition-colors block">
-                Contact Inquiries
-              </Link>
-            </li>
+            <li><Link href="/" className="hover:text-blue-500 hover:underline transition-colors block">Headquarters</Link></li>
+            <li><Link href="/about" className="hover:text-blue-500 hover:underline transition-colors block">Our Executive Team</Link></li>
+            <li><Link href="/news" className="hover:text-blue-500 hover:underline transition-colors block">Media Center Feed</Link></li>
+            <li><Link href="/contact" className="hover:text-blue-500 hover:underline transition-colors block">Contact Inquiries</Link></li>
           </ul>
         </div>
 
-        {/* COLUMN 3: Dynamic Active Sectors Routing Group */}
+        {/* COLUMN 3: Dynamic Active Sectors Links */}
         <div className="md:col-span-3 space-y-4">
           <h4 className="text-slate-200 text-xs font-bold uppercase tracking-wider">Active Sectors</h4>
           <ul className="space-y-2 text-xs">
             {sectors.length > 0 ? (
               sectors.map((sector) => (
                 <li key={sector._id}>
-                  {/* 🌟 AUTOMATED LINK COUPLING: Safely references the production Sanity slug parameters */}
+                  {/* 🌟 AUTOMATED DYNAMIC LINK ROUTING */}
                   <Link 
                     href={`/sectors/${sector.slug.current}`}
                     className="text-slate-400 hover:text-blue-500 hover:underline transition-colors block font-medium"
@@ -149,30 +130,19 @@ export async function GlobalFooter() {
                 </li>
               ))
             ) : (
-              // Fallback block if Sanity network handshakes experience high transmission delays
-              <li className="text-slate-600 italic">No active sectors loaded.</li>
+              <li className="text-slate-500 italic">No active sectors loaded.</li>
             )}
 
-                        {/* 🛠️ UPCOMING OPERATIONS SECTION ANCHORS */}
+            {/* Static Placeholders */}
             <li className="pt-2 border-t border-slate-900">
-              <span className="text-slate-600 block text-[10px] uppercase tracking-wider font-extrabold">
-                Upcoming Operations
-              </span>
+              <span className="text-slate-600 block text-[10px] uppercase tracking-wider font-extrabold">Upcoming Operations</span>
             </li>
-            <li>
-              <span className="text-slate-600 cursor-not-allowed opacity-50 block">
-                Financial Services (Not yet active)
-              </span>
-            </li>
-            <li>
-              <span className="text-slate-600 cursor-not-allowed opacity-50 block">
-                Mining & Minerals (Not yet active)
-              </span>
-            </li>
+            <li><span className="text-slate-600 cursor-not-allowed opacity-50 block">Financial Services (Not yet active)</span></li>
+            <li><span className="text-slate-600 cursor-not-allowed opacity-50 block">Mining & Minerals (Not yet active)</span></li>
           </ul>
         </div>
 
-        {/* 🏢 COLUMN 4: VERIFIED CORPORATE ADDRESS & LOCAL COMMUNICATION DETAILS */}
+        {/* COLUMN 4: Corporate Address & Details */}
         <div className="md:col-span-3 space-y-4">
           <h4 className="text-slate-200 text-xs font-bold uppercase tracking-wider">Address</h4>
           <ul className="space-y-3 text-xs leading-relaxed">
@@ -180,39 +150,18 @@ export async function GlobalFooter() {
               Henau Drive, Section 90, Allotment 07,<br />
               NCD, 111, Papua New Guinea
             </li>
-            
-            {/* Phone Verification Sub-Row Container */}
             <li className="flex items-center space-x-2 pt-1 border-t border-slate-900">
-              <svg className="w-3.5 h-3.5 text-slate-500 shrink-0 fill-current" viewBox="0 0 24 24">
-                <path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.27c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.27 1.02l-2.2 2.2z"/>
-              </svg>
-              <span className="text-slate-400 font-medium">
-                +675 3947844 <span className="text-slate-700">|</span> +675 78285135
-              </span>
+              <svg className="w-3.5 h-3.5 text-slate-500 shrink-0 fill-current" viewBox="0 0 24 24"><path d="M6.62 10.79a15.15 15.15 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.27c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.27 1.02l-2.2 2.2z"/></svg>
+              <span className="text-slate-400 font-medium">+675 3947844 | +675 78285135</span>
             </li>
-
-            {/* Email Registry Sub-Row Container */}
             <li className="flex items-center space-x-2 pt-1 border-t border-slate-900">
-              <svg className="w-3.5 h-3.5 text-slate-500 shrink-0 fill-current" viewBox="0 0 24 24">
-                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-              </svg>
-              <Link href="mailto:ednol.prime@gmail.com" className="hover:text-blue-500 hover:underline break-all">
-                ednol.prime@gmail.com 
-              </Link>
-              | 
-              <Link href="mailto:support@eprimecorp.com" className="hover:text-blue-500 hover:underline break-all">
-                support@eprimecorp.com
-              </Link>
+              <svg className="w-3.5 h-3.5 text-slate-500 shrink-0 fill-current" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              <Link href="mailto:ednol.prime@gmail.com" className="hover:text-blue-500 hover:underline break-all">ednol.prime@gmail.com</Link> | 
+              <Link href="mailto:support@eprimecorp.com" className="hover:text-blue-500 hover:underline break-all">support@eprimecorp.com</Link>
             </li>
-
-            {/* Web Verification URL Anchor Container */}
             <li className="flex items-center space-x-2 pt-1 border-t border-slate-900">
-              <svg className="w-3.5 h-3.5 text-slate-500 shrink-0 fill-current" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-              </svg>
-              <Link href="https://eprimecorp.com" className="text-blue-500 font-bold hover:underline tracking-tight">
-                www.eprimecorp.com
-              </Link>
+              <svg className="w-3.5 h-3.5 text-slate-500 shrink-0 fill-current" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              <Link href="https://eprimecorp.com" className="text-blue-500 font-bold hover:underline tracking-tight">www.eprimecorp.com</Link>
             </li>
           </ul>
         </div>
@@ -233,3 +182,10 @@ export async function GlobalFooter() {
     </footer>
   );
 }
+
+
+
+
+
+
+
