@@ -21,7 +21,9 @@ export const metadata: Metadata = {
   },
 
   description: "Powering Enterprise. Enabling Growth. Multi-sector industrial infrastructure systems across Papua New Guinea.",
-  keywords: ["ePrime", "ePrime Corporation", "Papua New Guinea", "PNG Business", "Civil Engineering PNG", "ICT Solutions Port Moresby", "Logistics and Freight", "Industrial Infrastructure"],
+  keywords: ["ePrime", "ePrime Corporation", "Papua New Guinea", "PNG Business", "Civil Engineering PNG", "ICT Solutions Port Moresby", "Logistics and Freight", "Industrial Infrastructure",
+    "prime", "corporation", "eprime", "e-prime", "Corporation", "eprime PNG", " eprime limited", "eprime corp", "eprime ltd"
+  ],
 
   // // Standard Canonical indexing references to prevent duplicate tracking penalties
   alternates: {
