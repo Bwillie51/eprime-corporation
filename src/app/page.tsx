@@ -162,7 +162,7 @@ export default async function HomePage() {
                       href={`/sectors/${sector.slug?.current || ''}`}
                       className="inline-flex items-center justify-center w-full border border-blue-200 hover:border-blue-500 text-slate-700 hover:text-blue-600 font-medium px-4 h-10 rounded-md transition-colors text-sm"
                     >
-                      Explore Sector →
+                      Explore →
                     </Link>
                   </div>
 

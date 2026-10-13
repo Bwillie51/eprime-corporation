@@ -90,7 +90,7 @@ export default function TeamGridClient({ team }: { team: TeamMember[] }) {
 
             {/* Bottom Visual Action Indicator Bar */}
             <div className="mt-auto pt-3 w-full border-t border-slate-100/80 flex items-center justify-center text-slate-400 group-hover:text-blue-500 transition-colors text-[10px] font-bold uppercase tracking-wider space-x-1">
-              <span>{isExpanded ? 'Collapse' : 'View full profile'}</span>
+              <span>{isExpanded ? '' : ''}</span>
               <svg 
                 className={`w-3.5 h-3.5 transform transition-transform duration-300 ${isExpanded ? 'rotate-180 text-blue-500' : 'group-hover:translate-x-0.5'}`} 
                 fill="none" 
